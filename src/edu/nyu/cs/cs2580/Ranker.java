@@ -17,8 +17,43 @@ class Ranker {
   public Vector < ScoredDocument > runquery(String query){
     Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
     for (int i = 0; i < _index.numDocs(); ++i){
-  //    retrieval_results.add(runquery(query, i));
-    	retrieval_results.add(runquery_tfidf(query, i));
+      retrieval_results.add(runquery(query, i));
+    }
+    Collections.sort(retrieval_results,Collections.reverseOrder());
+    return retrieval_results;
+  }
+  
+  public Vector < ScoredDocument > runquery_tfidf(String query){
+    Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+    for (int i = 0; i < _index.numDocs(); ++i){
+      retrieval_results.add(runquery_tfidf(query, i));
+    }
+    Collections.sort(retrieval_results,Collections.reverseOrder());
+    return retrieval_results;
+  }
+  
+  public Vector < ScoredDocument > runquery_ql(String query){
+    Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+    for (int i = 0; i < _index.numDocs(); ++i){
+      retrieval_results.add(runquery_lm(query, i));
+    }
+    Collections.sort(retrieval_results,Collections.reverseOrder());
+    return retrieval_results;
+  }
+  
+  public Vector < ScoredDocument > runquery_phrase(String query){
+    Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+    for (int i = 0; i < _index.numDocs(); ++i){
+      retrieval_results.add(runquery_phrase(query, i));
+    }
+    Collections.sort(retrieval_results,Collections.reverseOrder());
+    return retrieval_results;
+  }
+  
+  public Vector < ScoredDocument > runquery_linear(String query){
+    Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+    for (int i = 0; i < _index.numDocs(); ++i){
+//      retrieval_results.add((query, i));
     }
     Collections.sort(retrieval_results,Collections.reverseOrder());
     return retrieval_results;
